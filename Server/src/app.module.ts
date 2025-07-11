@@ -7,6 +7,18 @@ import { UserModule } from './user/user.module';
 import { HealthModule } from './health/health.module';
 import { TestModule } from './test/test.module';
 import { Auth0Module } from './auth0/auth0.module';
+import { AddressesModule } from './addresses/addresses.module';
+import { AttendanceRecordsModule } from './attendance-records/attendance-records.module';
+import { BuildingsModule } from './buildings/buildings.module';
+import { ClassroomsModule } from './classrooms/classrooms.module';
+import { ClassSchedulesModule } from './class-schedules/class-schedules.module';
+import { CoordinatorsModule } from './coordinators/coordinators.module';
+import { CoursesModule } from './courses/courses.module';
+import { DailyAttendancesModule } from './daily-attendances/daily-attendances.module';
+import { ExternalInstructorsModule } from './external-instructors/external-instructors.module';
+import { InstitutionsModule } from './institutions/institutions.module';
+import { PrincipalsModule } from './principals/principals.module';
+import { StudentsModule } from './students/students.module';
 import * as Joi from 'joi';
 
 interface EnvironmentConfig {
@@ -73,6 +85,18 @@ interface EnvironmentConfig {
     UserModule,
     HealthModule,
     TestModule,
+    AddressesModule,
+    AttendanceRecordsModule,
+    BuildingsModule,
+    ClassroomsModule,
+    ClassSchedulesModule,
+    CoordinatorsModule,
+    CoursesModule,
+    DailyAttendancesModule,
+    ExternalInstructorsModule,
+    InstitutionsModule,
+    PrincipalsModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
