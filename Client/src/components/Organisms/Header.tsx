@@ -48,9 +48,9 @@ export default function Header({ onMenuClick, isMenuOpen = false }: HeaderProps)
             whileHover={{ rotate: 5, scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
           >
-            <span className="text-white font-bold text-xs">A</span>
+            <span className="text-white font-bold text-xs">📚</span>
           </motion.div>
-          <h1 className="text-lg font-semibold text-gray-900">App</h1>
+          <h1 className="text-lg font-semibold text-gray-900">Studhere</h1>
         </motion.div>
 
         {/* Placeholder for future actions */}

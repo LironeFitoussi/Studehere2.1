@@ -12,20 +12,20 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      console.log('📝 Creating new user:', {
-        email: createUserDto.email,
-        firstName: createUserDto.firstName,
-        lastName: createUserDto.lastName,
-        auth0Id: createUserDto.auth0Id
-      });
+      // console.log('📝 Creating new user:', {
+      //   email: createUserDto.email,
+      //   firstName: createUserDto.firstName,
+      //   lastName: createUserDto.lastName,
+      //   auth0Id: createUserDto.auth0Id
+      // });
 
       const user = await this.userModel.create(createUserDto);
       
-      console.log('✅ User created:', {
-        id: user._id,
-        email: user.email,
-        auth0Id: user.auth0Id
-      });
+      // console.log('✅ User created:', {
+      //   id: user._id,
+      //   email: user.email,
+      //   auth0Id: user.auth0Id
+      // });
       
       return user;
     } catch (error) {

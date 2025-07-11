@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getUserByEmail as getUserByEmailService } from '@/api/userService';
-import type { User } from '@/types';
+import type { IUser } from '@/types';
 import type { User as Auth0User } from '@auth0/auth0-react';
 
 interface UserState {
-  currentUser: User | null;
+  currentUser: IUser | null;
   isLoading: boolean;
   error: string | null;
 }

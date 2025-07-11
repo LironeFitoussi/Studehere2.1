@@ -1,5 +1,10 @@
 import type { IInstitution } from "./institution.type";
 
+export interface InstitutionRole {
+  institution_id: string;
+  // Add other fields if needed
+}
+
 export interface IUser {
   _id: string;
   firstName: string;
@@ -13,6 +18,10 @@ export interface IUser {
   role: string;
   auth0Id?: string;
   active_institution?: IInstitution;
+  principal?: InstitutionRole[];
+  coordinator?: InstitutionRole[];
+  instructor?: InstitutionRole[];
+  student?: InstitutionRole[];
 }
 
 export type CreateUser = Omit<IUser, '_id'>; 

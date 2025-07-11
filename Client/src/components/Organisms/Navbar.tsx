@@ -23,18 +23,18 @@ export default function Navbar() {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const userState = useSelector((state: RootState) => state.user);
-  const { active_institution } = userState;
-  
+  const { active_institution } = userState.currentUser || {};
+
   // Determine role based on active institution
-  let effectiveRole = userState.role;
+  let effectiveRole = userState.currentUser?.role;
   if (active_institution) {
-    if (userState.principal?.some(p => p.institution_id === active_institution.id)) {
+    if (userState.currentUser?.principal?.some(p => p.institution_id === active_institution.id)) {
       effectiveRole = 'PRINCIPAL';
-    } else if (userState.coordinator?.some(c => c.institution_id === active_institution.id)) {
+    } else if (userState.currentUser?.coordinator?.some(c => c.institution_id === active_institution.id)) {
       effectiveRole = 'COORDINATOR';
-    } else if (userState.instructor?.some(i => i.institution_id === active_institution.id)) {
+    } else if (userState.currentUser?.instructor?.some(i => i.institution_id === active_institution.id)) {
       effectiveRole = 'INSTRUCTOR';
-    } else if (userState.student?.some(s => s.institution_id === active_institution.id)) {
+    } else if (userState.currentUser?.student?.some(s => s.institution_id === active_institution.id)) {
       effectiveRole = 'STUDENT';
     }
   }
@@ -65,7 +65,7 @@ export default function Navbar() {
   const filteredRoutes = routes.filter(route => {
     if (!route.isForLoggedIn) return true;
     if (!isAuthenticated) return false;
-    if (route.roles && !route.roles.includes(effectiveRole)) return false;
+    if (route.roles && !route.roles.includes(effectiveRole || '')) return false;
     return true;
   });
 
@@ -82,7 +82,7 @@ export default function Navbar() {
           routes={filteredRoutes}
           location={location}
           isAuthenticated={isAuthenticated}
-          role={effectiveRole}
+          role={effectiveRole || ''}
           t={t}
         />
         {/* Desktop Auth Buttons */}
@@ -101,7 +101,7 @@ export default function Navbar() {
         routes={filteredRoutes}
         location={location}
         isAuthenticated={isAuthenticated}
-        role={effectiveRole}
+        role={effectiveRole || ''}
         t={t}
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}

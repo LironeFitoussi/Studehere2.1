@@ -22,7 +22,11 @@ export function ProfileInfo({ isLoading, user }: ProfileInfoProps) {
                 {isLoading ? <Skeleton className="h-4 w-32" /> : user.email}
             </CardDescription>
             <div className="flex gap-2 mt-2">
-                <Badge variant="outline">{user.role || t('profile.user', 'User')}</Badge>
+                <Badge variant="outline">
+                    {user.role
+                        ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+                        : t('profile.user', 'User')}
+                </Badge>
             </div>
             <div className="mt-2 text-muted-foreground text-sm">
                 {isLoading ? <Skeleton className="h-4 w-24" /> : user.phone || t('profile.noPhone', 'No phone')}
