@@ -6,6 +6,7 @@ import { PageLoader } from '@/components/Atoms/LoadingSpinner';
 import Sidebar from '@/components/Organisms/Sidebar';
 import MobileDrawer from '@/components/Organisms/MobileDrawer';
 import Header from '@/components/Organisms/Header';
+import { GuestGuard } from '@/components/GuestGuard';
 
 export default function Layout() {
   const { i18n } = useTranslation();
@@ -33,7 +34,8 @@ export default function Layout() {
 
   // Public routes that don't need sidebar
   const publicRoutes = ['/', '/auth'];
-  const isPublicRoute = publicRoutes.includes(location.pathname);
+  const isGettingStartedRoute = location.pathname.startsWith('/getting-started');
+  const isPublicRoute = publicRoutes.includes(location.pathname) || isGettingStartedRoute;
 
   // Show loading state while authentication is being checked
   if (isLoading) {
@@ -55,35 +57,37 @@ export default function Layout() {
     );
   }
 
-  // For protected routes, show responsive layout
+  // For protected routes, show responsive layout with guest guard
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Desktop Sidebar - Hidden on mobile */}
-      <aside className="hidden lg:block">
-        <Sidebar />
-      </aside>
+    <GuestGuard>
+      <div className="flex h-screen bg-gray-50">
+        {/* Desktop Sidebar - Hidden on mobile */}
+        <aside className="hidden lg:block">
+          <Sidebar />
+        </aside>
 
-      {/* Mobile Drawer */}
-      <MobileDrawer 
-        isOpen={isMobileDrawerOpen} 
-        onClose={closeMobileDrawer} 
-      />
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Mobile Header */}
-        <Header 
-          onMenuClick={toggleMobileDrawer}
-          isMenuOpen={isMobileDrawerOpen}
+        {/* Mobile Drawer */}
+        <MobileDrawer 
+          isOpen={isMobileDrawerOpen} 
+          onClose={closeMobileDrawer} 
         />
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto">
-          <Suspense fallback={<PageLoader />}>
-            <Outlet />
-          </Suspense>
-        </main>
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Mobile Header */}
+          <Header 
+            onMenuClick={toggleMobileDrawer}
+            isMenuOpen={isMobileDrawerOpen}
+          />
+
+          {/* Page Content */}
+          <main className="flex-1 overflow-auto">
+            <Suspense fallback={<PageLoader />}>
+              <Outlet />
+            </Suspense>
+          </main>
+        </div>
       </div>
-    </div>
+    </GuestGuard>
   );
 }

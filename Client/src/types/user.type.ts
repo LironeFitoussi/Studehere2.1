@@ -1,4 +1,5 @@
 import type { IInstitution } from "./institution.type";
+import type { IAddress } from "./address.type";
 
 export interface InstitutionRole {
   institution_id: string;
@@ -12,9 +13,7 @@ export interface IUser {
   email: string;
   phone: string;
   address?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
+  addressDetails?: IAddress;
   role: string;
   auth0Id?: string;
   active_institution?: IInstitution;

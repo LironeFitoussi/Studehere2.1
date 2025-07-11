@@ -6,6 +6,18 @@ import { AxiosError } from 'axios';
 
 const endpoint = '/users';
 
+export interface AddressDetails {
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
+  lat: number;
+  lng: number;
+  formatted_address: string;
+  hebrew_address: string;
+}
+
 // --- CRUD API functions ---
 export const getAllUsers = async (): Promise<IUser[]> => {
   const { data } = await axiosInstance.get<IUser[]>(endpoint);
@@ -67,9 +79,15 @@ export const createUser = async (user: CreateUser): Promise<IUser> => {
   return data;
 };
 
-// Update user
-export const updateUser = async (user: IUser): Promise<IUser> => {
-  const { data } = await axiosInstance.put<IUser>(`${endpoint}/${user._id}`, user);
+// Update user (PATCH, partial)
+export const updateUser = async (id: string, user: Partial<IUser>): Promise<IUser> => {
+  const { data } = await axiosInstance.patch<IUser>(`${endpoint}/${id}`, user);
+  return data;
+};
+
+// Update User's Address
+export const updateUserAddress = async (id: string, address: AddressDetails): Promise<IUser> => {
+  const { data } = await axiosInstance.patch<IUser>(`${endpoint}/${id}/address`, { ...address });
   return data;
 };
 

@@ -1,6 +1,6 @@
 // Address Types
 export interface IAddress {
-    id?: string;
+    _id?: string; // MongoDB ObjectId
     street: string;
     city: string;
     state: string;

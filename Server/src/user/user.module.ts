@@ -4,10 +4,12 @@ import { UserController } from './user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
 import { RoleGuard, AdminGuard, UserOnlyGuard, AuthenticatedGuard } from './user.guard';
+import { AddressesModule } from '../addresses/addresses.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    AddressesModule,
   ],
   controllers: [UserController],
   providers: [UserService, RoleGuard, AdminGuard, UserOnlyGuard, AuthenticatedGuard],

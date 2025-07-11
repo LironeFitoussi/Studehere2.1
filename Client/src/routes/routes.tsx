@@ -12,6 +12,11 @@ import DashboardRoute from '@/routes/DashboardRoute';
 import TestRoute from '@/routes/TestRoute';
 import ProfileRoute from './ProfileRoute';
 
+// Getting Started Routes
+import GettingStartedRoute from './GettingStartedRoute';
+import CreateInstitutionRoute from './CreateInstitutionRoute';
+import AddBuildingsRoute from './AddBuildingsRoute';
+
 // Loaders
 export const router = createBrowserRouter([
   {
@@ -34,6 +39,18 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProtectedRoute element={<ProfileRoute />} />,
+      },
+      {
+        path: 'getting-started',
+        element: <GettingStartedRoute />,
+      },
+      {
+        path: 'getting-started/create-institution',
+        element: <CreateInstitutionRoute />,
+      },
+      {
+        path: 'getting-started/create-institution/add-buildings',
+        element: <AddBuildingsRoute />,
       },
     ],
   },

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsEmail, IsString, IsOptional, IsEnum } from 'class-validator';
+ 
+import { IsEmail, IsString, IsOptional, IsEnum, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -21,6 +21,10 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
+  street?: string;
+
+  @IsString()
+  @IsOptional()
   city?: string;
 
   @IsString()
@@ -29,7 +33,27 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
+  country?: string;
+
+  @IsString()
+  @IsOptional()
   zip?: string;
+
+  @IsNumber()
+  @IsOptional()
+  lat?: number;
+
+  @IsNumber()
+  @IsOptional()
+  lng?: number;
+
+  @IsString()
+  @IsOptional()
+  formatted_address?: string;
+
+  @IsString()
+  @IsOptional()
+  hebrew_address?: string;
 
   @IsEnum(['admin', 'user', 'guest'])
   @IsOptional()

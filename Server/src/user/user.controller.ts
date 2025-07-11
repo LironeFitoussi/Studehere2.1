@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AddressDetails } from '../types/address.type';
 
 @Controller('users')
 export class UserController {
@@ -22,18 +23,27 @@ export class UserController {
     return this.userService.findByEmail(email);
   }
 
+  @Patch(':id/address')
+  updateAddress(@Param('id') id: string, @Body() addressData: AddressDetails) {
+    return this.userService.updateAddress(id, addressData);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    console.log('======================');
+    console.log(updateUserDto);
+    console.log(id);
+    console.log('======================');
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

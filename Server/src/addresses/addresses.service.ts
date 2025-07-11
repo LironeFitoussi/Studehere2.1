@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
+import { Address } from './entities/address.entity';
 
 @Injectable()
 export class AddressesService {
-  create(createAddressDto: CreateAddressDto) {
-    return 'This action adds a new address';
+  constructor(@InjectModel(Address.name) private addressModel: Model<Address>) {}
+
+  async create(createAddressDto: CreateAddressDto) {
+    return this.addressModel.create(createAddressDto);
   }
 
   findAll() {
-    return `This action returns all addresses`;
+    return this.addressModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  findOne(id: string) {
+    return this.addressModel.findById(id);
   }
 
-  update(id: number, updateAddressDto: UpdateAddressDto) {
-    return `This action updates a #${id} address`;
+  update(id: string, updateAddressDto: UpdateAddressDto) {
+    return this.addressModel.findByIdAndUpdate(id, updateAddressDto, { new: true });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} address`;
+  remove(id: string) {
+    return this.addressModel.findByIdAndDelete(id);
   }
 }

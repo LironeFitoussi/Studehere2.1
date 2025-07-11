@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type UserDocument = User & Document;
 
@@ -34,6 +34,9 @@ export class User {
 
   @Prop({ type: String, enum: ['admin', 'user', 'guest'], default: 'guest' })
   role: string;
+
+  @Prop({ type: Types.ObjectId, ref: 'Address', default: null })
+  addressDetails: Types.ObjectId;
 
   @Prop()
   createdAt?: Date;
