@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LogOut, HelpCircle, LayoutDashboard } from 'lucide-react';
+import { LogOut, HelpCircle, LayoutDashboard, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 
@@ -17,6 +17,7 @@ export default function Sidebar({ onItemClick, className = '' }: SidebarProps) {
   const navigationItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/test', label: 'Test', icon: HelpCircle },
+    { href: '/profile', label: 'Profile', icon: User },
   ];
 
   const isActive = (href: string) => {

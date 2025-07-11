@@ -32,7 +32,7 @@ export class User {
   @Prop({ trim: true, default: '' })
   zip: string;
 
-  @Prop({ type: String, enum: ['admin', 'user'], default: 'user' })
+  @Prop({ type: String, enum: ['admin', 'user', 'guest'], default: 'guest' })
   role: string;
 
   @Prop()

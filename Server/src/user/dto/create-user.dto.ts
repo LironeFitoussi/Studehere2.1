@@ -31,7 +31,7 @@ export class CreateUserDto {
   @IsOptional()
   zip?: string;
 
-  @IsEnum(['admin', 'user'])
+  @IsEnum(['admin', 'user', 'guest'])
   @IsOptional()
   role?: string = 'user';
 

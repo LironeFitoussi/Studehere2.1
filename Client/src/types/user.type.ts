@@ -1,3 +1,5 @@
+import type { IInstitution } from "./institution.type";
+
 export interface IUser {
   _id: string;
   firstName: string;
@@ -10,6 +12,7 @@ export interface IUser {
   zip?: string;
   role: string;
   auth0Id?: string;
+  active_institution?: IInstitution;
 }
 
 export type CreateUser = Omit<IUser, '_id'>; 

@@ -10,6 +10,7 @@ import AuthRoute from './AuthRoute';
 import ErrorPage from './ErrorPage';
 import DashboardRoute from '@/routes/DashboardRoute';
 import TestRoute from '@/routes/TestRoute';
+import ProfileRoute from './ProfileRoute';
 
 // Loaders
 export const router = createBrowserRouter([
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: 'test',
         element: <ProtectedRoute element={<TestRoute />} />,
+      },
+      {
+        path: 'profile',
+        element: <ProtectedRoute element={<ProfileRoute />} />,
       },
     ],
   },
